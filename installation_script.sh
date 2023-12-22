@@ -1,14 +1,15 @@
 #!/bin/bash
 NODE_MAJOR=21
-LOG_PATH=/var/log
+LOG_PATH=~/.logs
 
 cd ~
+mkdir -p $LOG_PATH
 
 # create my logs 
 sudo touch $LOG_PATH/installation_log_error.txt \
     $LOG_PATH/installation_log_success.txt
 
-sudo add-apt-repository ppa:ondrej/php
+sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
 sudo apt install -y \
     cowsay \
@@ -30,11 +31,11 @@ sudo apt update
 sudo apt install -y nodejs >> $LOG_PATH/installation_log_success.txt 2> $LOG_PATH/installation_log_error.txt
 
 # Docker Config
-sudo apt remove docker-desktop
+sudo apt remove docker-desktop -y
     # remove if it exists
 rm -r $HOME/.docker/desktop
 sudo rm /usr/local/bin/com.docker.cli
-sudo apt purge docker-desktop
+sudo apt purge docker-desktop -y
 
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -48,7 +49,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin >> $LOG_PATH/installation_log_success.txt 2> $LOG_PATH/installation_log_error.txt
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin >> $LOG_PATH/installation_log_success.txt 2> $LOG_PATH/installation_log_error.txt
 
 wget -O docker-desktop.deb "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.26.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64"
 sudo dpkg -i docker-desktop.deb >> $LOG_PATH/installation_log_success.txt 2> $LOG_PATH/installation_log_error.txt
