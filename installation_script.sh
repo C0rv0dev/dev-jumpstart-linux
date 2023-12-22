@@ -15,8 +15,9 @@ touch $LOG_PATH/installation_log_error.txt \
 add-apt-repository ppa:ondrej/php -y
 apt update
 apt install -y \
-    git \
     cowsay \
+    git \
+    code \
     nodejs \
     npm \
     ca-certificates \
