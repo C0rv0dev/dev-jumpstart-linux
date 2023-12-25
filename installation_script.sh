@@ -2,34 +2,20 @@
 # change these values to match your environment
 NODE_MAJOR=21
 LOG_PATH=~/.logs
-USERNAME="YOUR_USERNAME"
+USERNAME="k0m4t5u"
 
 # create my logs
 cd ~
 mkdir -p $LOG_PATH
 
-touch $LOG_PATH/installation_log_error.txt \
+touch $LOG_PATH/installation_log_error.txt \ddd
     $LOG_PATH/installation_log_success.txt
 
 # Install Dependencies
 add-apt-repository ppa:ondrej/php -y
+
 apt update
-apt install -y \
-    cowsay \
-    git \
-    code \
-    nodejs \
-    npm \
-    ca-certificates \
-    curl \
-    gnupg \
-    mysql-server \
-    apache2 \
-    php-cli \ 
-php-mbstring \
-    php-curl \
-    unzip \
-    php >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
+apt install -y cowsay git code nodejs npm ca-certificates curl gnupg mysql-server apache2 php-cli php-mbstring php-curl unzip php >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
 
 # NPM and Nodejs Config
 mkdir -p /etc/apt/keyrings
@@ -67,19 +53,19 @@ wget -O docker-desktop.deb "https://desktop.docker.com/linux/main/amd64/docker-d
 dpkg -i docker-desktop.deb >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
 rm docker-desktop.deb
 
-# Docker Post Install Config
-groupadd docker
-usermod -aG docker $USERNAME
-newgrp docker
-chown "$USERNAME":"$USERNAME" /home/"$USERNAME"/.docker -R
-chmod g+rwx "$HOME/.docker" -R
-
 # Composer Config
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/compose
+
+# Docker Post Install Config
+groupadd docker
+usermod -aG docker $USERNAME
+newgrp docker
+chown $USERNAME:$USERNAME /home/$USERNAME/.docker -R
+chmod g+rwx "/home/$USERNAME/.docker" -R
 
 echo "---------------------------------------------------------"
 cowsay "Installation Completed"
