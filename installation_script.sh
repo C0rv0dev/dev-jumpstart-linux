@@ -2,13 +2,13 @@
 # change these values to match your environment
 NODE_MAJOR=21
 LOG_PATH=~/.logs
-USERNAME="k0m4t5u"
+USERNAME="YOUR_USERNAME"
 
 # create my logs
 cd ~
 mkdir -p $LOG_PATH
 
-touch $LOG_PATH/installation_log_error.txt \ddd
+touch $LOG_PATH/installation_log_error.txt \
     $LOG_PATH/installation_log_success.txt
 
 # Install Dependencies

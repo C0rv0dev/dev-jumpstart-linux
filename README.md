@@ -8,12 +8,14 @@
     - You're gonna need root access to run this script;
 ---
 ### Tutorial: 
+    Change your name in the file to the user you're logged into
+    
     Make this file executable before run it with:
         sudo chmod u-x filename.sh
 
     execute it in the shell with:
         sudo su
-        path/to/file/filename.sh
+        ./path/to/file/filename.sh
 
     To view results and logs:
         sudo su
