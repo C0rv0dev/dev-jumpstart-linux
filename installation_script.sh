@@ -9,13 +9,13 @@ cd ~
 mkdir -p $LOG_PATH
 
 touch $LOG_PATH/installation_log_error.txt \
-    $LOG_PATH/installation_log_success.txt
+  $LOG_PATH/installation_log_success.txt
 
-# Install Dependencies
 add-apt-repository ppa:ondrej/php -y
 
+# Install Dependencies
 apt update
-apt install -y cowsay git code nodejs npm ca-certificates curl gnupg mysql-server apache2 php-cli php-mbstring php-curl unzip php >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
+apt install -y cowsay obs-studio discord git code nodejs npm ca-certificates curl gnupg mysql-server apache2 php-cli php-mbstring php-curl unzip php >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
 
 # NPM and Nodejs Config
 mkdir -p /etc/apt/keyrings
@@ -40,9 +40,9 @@ chmod a+r /etc/apt/keyrings/docker.gpg
 
 # Add the repository to Apt sources:
 echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-    tee /etc/apt/sources.list.d/docker.list >/dev/null
+  tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # Install Docker Engine, containerd, and Docker Compose
 apt update
@@ -60,6 +60,10 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/compose
 
+# Flatpack Config
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install -y com.zoom.Zoom com.getpostman.Postman io.dbeaver.DBeaverCommunity com.spotify.Client >>$LOG_PATH/installation_log_success.txt 2>$LOG_PATH/installation_log_error.txt
+
 # Docker Post Install Config
 groupadd docker
 usermod -aG docker $USERNAME
@@ -67,6 +71,9 @@ newgrp docker
 chown $USERNAME:$USERNAME /home/$USERNAME/.docker -R
 chmod g+rwx "/home/$USERNAME/.docker" -R
 
-echo "---------------------------------------------------------"
-cowsay "Installation Completed"
-echo "---------------------------------------------------------"
+# break lines
+echo
+echo
+
+# print success message
+cowsay "Installation Completed Successfully!"
