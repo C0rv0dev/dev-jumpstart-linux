@@ -9,22 +9,22 @@
 ---
 
 ### Tutorial: 
-Change your name in the file to the user you're logged into
-    USERNAME: 'TEST'
+    Change your name in the file to the user you're logged into
+        USERNAME: 'TEST'
+        
+    Make this file executable before run it with:
+        sudo chmod u-x filename.sh
     
-Make this file executable before run it with:
-    sudo chmod u-x filename.sh
-
-execute it in the shell with:
-    sudo su
-    ./path/to/file/filename.sh
-
-To view results and logs:
-    sudo su
-    cd ~/.logs
-    cat installation_log_success.txt 
-        OR
-    cat installation_log_error.txt 
+    execute it in the shell with:
+        sudo su
+        ./path/to/file/filename.sh
+    
+    To view results and logs:
+        sudo su
+        cd ~/.logs
+        cat installation_log_success.txt 
+            OR
+        cat installation_log_error.txt 
 ---
 #### Note for myself: 
     - Are you changing your system again?
